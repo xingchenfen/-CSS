@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>图片比例变大变小</title>
+		<style type="text/css">
+			*html.thumbImage img {
+				width: expression(this.width>600&&this.width>this.height?450:auto);
+				height: expresion(this.height>450?450:auto);
+			}
+			.thumbImage {
+				padding: 20px;
+				margin: auto;
+				height:400px;
+				border: 1px solid red;
+			}
+			.thumbImage img {
+				max-width: 100%!important;
+				max-height:100%!important;			
+				height: auto!important;
+			
+				border:1px solid blue;
+			}
+			
+			
+			p:after{
+				content:"36";
+				background: blue;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<p>图片<sub>img</sub><del>按比例缩放</del><sup>123</sup></p>
+		<div class="thumbImage" ><img src="../3.png"></div>
+		
+		
+		<div class="wrapper">
+			<img src="../2.jpg" alt="photos" title="图片img"id="imgid">
+		</div>
+		<div class="box"></div>
+
+		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+		<script type="text/javascript">
+				var $img = $("img");
+				var src = $img.attr("src");
+				var box=$(".box")
+				$img.on("click", function() {
+					  autoImgSize('imgid',500);
+              
+				})
+       function  autoImgSize(img,size){
+            if(!size){
+                size=1000;//设置默认最大值为1000
+            }
+            var imgobj= document.getElementById(img); //获取对象
+            imgobj.style.width = "auto";
+            imgobj.style.height = "auto";  //释放图片本来的大小
+            var imgwidth=imgobj.width;
+            var imgheight=imgobj.height;
+             if(imgwidth>imgheight){     //判断是width和height哪一个大。大的先处理。设置最大值size
+                 if(imgwidth>size){
+                     imgobj.style.width = size + "px";
+                 }
+                 imgheight=imgobj.height;
+                 if(imgheight>size){
+ 
+                     imgobj.style.height = size + "px";
+                 }
+             }else{
+                 if(imgheight>size){
+                     imgobj.style.height = size + "px";
+                 }
+                 imgwidth=imgobj.width;
+                 if(imgwidth>size){
+                     imgobj.style.width = size + "px";
+                 }
+             }
+            }
+            
+              
+        
+		
+		</script>
+	</body>
+
+</html>
